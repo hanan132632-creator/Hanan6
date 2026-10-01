@@ -4,11 +4,13 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -29,7 +31,8 @@ import com.example.ui.viewmodel.RealEstateViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainApp(
-    viewModel: RealEstateViewModel = viewModel()
+    viewModel: RealEstateViewModel = viewModel(),
+    onSwitchToWebView: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     val selectedTab by viewModel.selectedTab.collectAsStateWithLifecycle()
@@ -68,12 +71,53 @@ fun MainApp(
             modifier = Modifier.fillMaxSize(),
             containerColor = LuxuryNavyDark,
             topBar = {
-                TopHeader(
-                    unreadNotificationsCount = unreadNotifsCount,
-                    onNotificationClick = { viewModel.setShowNotificationsDialog(true) },
-                    onSettingsClick = { viewModel.setShowSettingsDialog(true) },
-                    onAdClick = { viewModel.openInAppAdPreview() }
-                )
+                Column {
+                    if (onSwitchToWebView != null) {
+                        Surface(
+                            color = Color(0xFF0D172E),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .statusBarsPadding()
+                                    .padding(horizontal = 16.dp, vertical = 6.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "📱 أنت في وضع تطبيق الأندرويد",
+                                    color = Color(0xFF94A3B8),
+                                    fontSize = 11.sp
+                                )
+                                Button(
+                                    onClick = onSwitchToWebView,
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = LuxuryGold,
+                                        contentColor = Color.Black
+                                    ),
+                                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
+                                    shape = RoundedCornerShape(8.dp),
+                                    modifier = Modifier.height(28.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Language,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(13.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("عرض الموقع الإلكتروني", fontSize = 11.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                                }
+                            }
+                        }
+                    }
+                    TopHeader(
+                        unreadNotificationsCount = unreadNotifsCount,
+                        onNotificationClick = { viewModel.setShowNotificationsDialog(true) },
+                        onSettingsClick = { viewModel.setShowSettingsDialog(true) },
+                        onAdClick = { viewModel.openInAppAdPreview() }
+                    )
+                }
             },
             bottomBar = {
                 NavigationBar(
