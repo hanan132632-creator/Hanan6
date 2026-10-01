@@ -18,8 +18,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                // By default, display the live Website screen directly as requested by the user
-                var showNativeApp by remember { mutableStateOf(false) }
+                // Native Jetpack Compose App loads instantly with offline support
+                var showNativeApp by remember { mutableStateOf(true) }
 
                 if (showNativeApp) {
                     MainApp(onSwitchToWebView = { showNativeApp = false })
@@ -33,4 +33,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
