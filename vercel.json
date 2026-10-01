@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/web/index.html" },
+    { "source": "/index.html", "destination": "/web/index.html" },
+    { "source": "/blog", "destination": "/web/blog.html" },
+    { "source": "/blog.html", "destination": "/web/blog.html" },
+    { "source": "/store", "destination": "/web/store.html" },
+    { "source": "/store.html", "destination": "/web/store.html" },
+    { "source": "/privacy", "destination": "/web/privacy.html" },
+    { "source": "/privacy.html", "destination": "/web/privacy.html" },
+    { "source": "/terms", "destination": "/web/terms.html" },
+    { "source": "/terms.html", "destination": "/web/terms.html" },
+    { "source": "/about", "destination": "/web/about.html" },
+    { "source": "/about.html", "destination": "/web/about.html" },
+    { "source": "/contact", "destination": "/web/contact.html" },
+    { "source": "/contact.html", "destination": "/web/contact.html" },
+    { "source": "/(.*)", "destination": "/web/$1" }
+  ]
+}
