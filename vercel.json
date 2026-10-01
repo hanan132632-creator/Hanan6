@@ -1,24 +1,95 @@
 {
+  "version": 2,
   "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/web",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/web/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/web/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/web/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/web/index.html" },
-    { "source": "/index.html", "destination": "/web/index.html" },
+    { "source": "/robots.txt", "destination": "/web/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/web/sitemap.xml" },
+    { "source": "/ads.txt", "destination": "/web/ads.txt" },
+    { "source": "/app-ads.txt", "destination": "/web/app-ads.txt" },
+    { "source": "/manifest.json", "destination": "/web/manifest.json" },
+    { "source": "/404", "destination": "/web/404.html" },
+    { "source": "/404.html", "destination": "/web/404.html" },
     { "source": "/blog", "destination": "/web/blog.html" },
-    { "source": "/blog.html", "destination": "/web/blog.html" },
     { "source": "/article-1", "destination": "/web/article-1.html" },
-    { "source": "/article-1.html", "destination": "/web/article-1.html" },
     { "source": "/article-2", "destination": "/web/article-2.html" },
-    { "source": "/article-2.html", "destination": "/web/article-2.html" },
     { "source": "/store", "destination": "/web/store.html" },
-    { "source": "/store.html", "destination": "/web/store.html" },
-    { "source": "/privacy", "destination": "/web/privacy.html" },
-    { "source": "/privacy.html", "destination": "/web/privacy.html" },
-    { "source": "/terms", "destination": "/web/terms.html" },
-    { "source": "/terms.html", "destination": "/web/terms.html" },
     { "source": "/about", "destination": "/web/about.html" },
-    { "source": "/about.html", "destination": "/web/about.html" },
     { "source": "/contact", "destination": "/web/contact.html" },
-    { "source": "/contact.html", "destination": "/web/contact.html" },
-    { "source": "/(.*)", "destination": "/web/$1" }
+    { "source": "/privacy", "destination": "/web/privacy.html" },
+    { "source": "/terms", "destination": "/web/terms.html" },
+    { "source": "/", "destination": "/web/index.html" },
+    { "source": "/:match*", "destination": "/web/:match*" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/ads.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/app-ads.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    }
   ]
 }
