@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المدونة العقارية الاستثمارية | عقارات النخبة</title>
+  <meta name="description" content="أحدث المقالات والدراسات والتحليلات العقارية حول سوق العقارات الفاخرة، التمويل العقاري، والفرص الاستثمارية في المملكة العربية السعودية." />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { font-family: 'Cairo', sans-serif; background-color: #060A14; color: #F8FAFC; }
+    .gold-gradient-text { background: linear-gradient(135deg, #FFF1C5 0%, #D4AF37 50%, #AA820A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .luxury-card {
+      background: linear-gradient(180deg, rgba(19, 31, 61, 0.8) 0%, rgba(9, 14, 28, 0.95) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      transition: all 0.3s ease;
+    }
+    .luxury-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.65);
+      box-shadow: 0 15px 30px -10px rgba(212, 175, 55, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-[#060A14] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#D4AF37] selection:text-black">
+
+  <!-- ================= MAIN NAVIGATION RIBBON BAR (شريط القائمة الشامل لجميع الأقسام) ================= -->
+  <nav aria-label="شريط أقسام الموقع الشامل" class="bg-[#080E1E]/95 border-b border-[#D4AF37]/30 py-2.5 px-3 backdrop-blur-md sticky top-0 z-50 shadow-xl">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-600 via-[#D4AF37] to-yellow-200 p-0.5 flex items-center justify-center">
+          <div class="w-full h-full bg-[#060A14] rounded-[6px] flex items-center justify-center">
+            <i data-lucide="crown" class="w-4 h-4 text-[#D4AF37]"></i>
+          </div>
+        </div>
+        <span class="text-sm font-black gold-gradient-text hidden sm:inline">عقارات النخبة</span>
+      </a>
+
+      <!-- 7 Horizontal Ribbon Buttons -->
+      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-none py-1 px-1">
+        <a href="index.html" class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-200 hover:text-[#D4AF37] hover:bg-[#131F3D] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition flex items-center gap-1.5 shrink-0">
+          <i data-lucide="home" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+          <span>الرئيسية</span>
+        </a>
+        <a href="blog.html" class="px-3 py-1.5 rounded-full text-xs font-black transition flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-400 text-black shadow-md shadow-[#D4AF37]/20 shrink-0">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span>المدونة</span>
+        </a>
+        <a href="store.html" class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-200 hover:text-[#D4AF37] hover:bg-[#131F3D] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition flex items-center gap-1.5 shrink-0">
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+          <span>المتجر</span>
+        </a>
+        <a href="about.html" class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-200 hover:text-[#D4AF37] hover:bg-[#131F3D] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition flex items-center gap-1.5 shrink-0">
+          <i data-lucide="award" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+          <span>من نحن</span>
+        </a>
+        <a href="contact.html" class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-200 hover:text-[#D4AF37] hover:bg-[#131F3D] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition flex items-center gap-1.5 shrink-0">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+          <span>اتصل بنا</span>
+        </a>
+        <a href="privacy.html" class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-200 hover:text-[#D4AF37] hover:bg-[#131F3D] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition flex items-center gap-1.5 shrink-0">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+          <span>سياسة الخصوصية</span>
+        </a>
+        <a href="terms.html" class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-200 hover:text-[#D4AF37] hover:bg-[#131F3D] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition flex items-center gap-1.5 shrink-0">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+          <span>شروط الاستخدام</span>
+        </a>
+      </div>
+
+      <a href="https://wa.me/966509876543" target="_blank" rel="noopener noreferrer" class="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-600/20 text-emerald-400 border border-emerald-500/40 text-xs font-bold hover:bg-emerald-600 hover:text-white transition shrink-0">
+        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+        <span>واتساب VIP</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-[#080E1E]/80 border-b border-[#D4AF37]/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-[#D4AF37] to-yellow-200 p-0.5">
+          <div class="w-full h-full bg-[#080E1E] rounded-[10px] flex items-center justify-center">
+            <i data-lucide="crown" class="w-5 h-5 text-[#D4AF37]"></i>
+          </div>
+        </div>
+        <div>
+          <span class="text-xl font-black gold-gradient-text">عقارات النخبة</span>
+          <span class="block text-[10px] text-[#D4AF37]/70 font-semibold tracking-wider">ELITE REAL ESTATE</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="index.html" class="hover:text-[#D4AF37] transition">الرئيسية</a>
+        <a href="blog.html" class="text-[#D4AF37] font-bold border-b-2 border-[#D4AF37] pb-1">المدونة العقارية</a>
+        <a href="about.html" class="hover:text-[#D4AF37] transition">من نحن</a>
+        <a href="contact.html" class="hover:text-[#D4AF37] transition">اتصل بنا</a>
+        <a href="privacy.html" class="hover:text-[#D4AF37] transition">الخصوصية</a>
+      </nav>
+
+      <a href="contact.html" class="px-4 py-2 rounded-xl bg-[#D4AF37] text-black font-extrabold text-xs shadow hover:bg-yellow-400 transition">
+        استشارة عقارية
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
+    
+    <!-- Blog Hero -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-bold mb-3 border border-[#D4AF37]/30">
+        <i data-lucide="book-open" class="w-4 h-4"></i>
+        <span>أبحاث وتحليلات السوق العقاري السعودي</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+        المدونة العقارية <span class="gold-gradient-text">والاستثمارية الذكية</span>
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+        مقالات تحليلية موثوقة، نصائح للتمويل العقاري البنكي، وتوقعات نمو أسعار الفلل والأراضي والقصور بالمملكة.
+      </p>
+    </div>
+
+    <!-- Featured Hero Article: Article 1 (دليل امتلاك عقار فاخر والاستثمار الآمن) -->
+    <article class="luxury-card rounded-3xl overflow-hidden mb-12 grid grid-cols-1 lg:grid-cols-12 gap-0 border border-[#D4AF37]/40 shadow-2xl">
+      <div class="lg:col-span-7 h-80 lg:h-auto relative overflow-hidden group">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80" alt="دليل امتلاك عقار فاخر في السعودية" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080E1E] via-transparent to-transparent lg:hidden"></div>
+        <div class="absolute top-4 right-4 flex items-center gap-2">
+          <span class="px-3.5 py-1.5 rounded-full text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-400 text-black shadow-lg">
+            ⭐ مقال الأسبوع الحصري
+          </span>
+          <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-[#080E1E]/90 text-[#D4AF37] border border-[#D4AF37]/30 backdrop-blur-sm hidden sm:inline">
+            معايير E-E-A-T
+          </span>
+        </div>
+      </div>
+      <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 text-xs text-slate-400 mb-3">
+            <span class="text-[#D4AF37] font-bold flex items-center gap-1">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              دليل الاستثمار والوساطة الآمنة
+            </span>
+            <span>•</span>
+            <span class="font-mono text-slate-300">قراءة في 8 دقائق</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-white leading-snug mb-3 hover:text-[#D4AF37] transition">
+            <a href="article-1.html">دليلك الشامل لامتلاك عقار فاخر في المملكة 2026: كيف تُحدث منصة "عقارات النخبة" ثورة في الوساطة والاستثمار الآمن؟</a>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            من فخ الشائعات والإعلانات المضللة إلى الاستثمار الموثق برخصة فال المعتمدة. نكشف لك أسرار فحص الصكوك الإلكترونية، وحساب التمويل البنكي بدقة عبر حاسبة المنصة، واقتناص الفرص الاستثنائية في محيط الدرعية وشمال العاصمة.
+          </p>
+        </div>
+        <div class="pt-6 border-t border-slate-800 flex items-center justify-between mt-6">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center text-[#D4AF37] font-bold text-xs">
+              د.ر
+            </div>
+            <div class="text-xs">
+              <span class="text-white font-bold block">د. راشد التميمي</span>
+              <span class="text-[#D4AF37] text-[10px]">خبير استثماري وتمويلي معتمد</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="article-1.html" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-extrabold text-xs shadow-lg hover:from-amber-600 hover:to-amber-500 transition flex items-center gap-1.5">
+              <span>صفحة المقال</span>
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </a>
+            <button onclick="openArticle('art-elite-guide')" class="px-3.5 py-2.5 rounded-xl bg-[#080E1E] text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition">
+              قراءة سريعة
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Article 2: أدوات المنصة ومتجر الخدمات (المقال الثاني الجديد) -->
+      <article class="luxury-card rounded-2xl overflow-hidden flex flex-col justify-between border border-[#D4AF37]/30">
+        <div class="h-48 relative overflow-hidden group">
+          <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80" alt="خدمات وتصوير الدرون العقاري" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#0D1527]/90 text-[#D4AF37] border border-[#D4AF37]/30">
+            أدوات المنصة والمتجر
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+              <span class="text-[#D4AF37] font-bold">دليل الملاك والمطورين</span>
+              <span>قراءة في 6 دقائق</span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-1 leading-snug">
+              من حاسبة التمويل إلى التصوير بالدرون: 5 خدمات حصرية في "عقارات النخبة" ترفع قيمة عقارك وتختصر 70% من وقت البيع
+            </h3>
+            <p class="text-xs text-slate-300 mt-2 line-clamp-3 leading-relaxed">
+              لماذا تفشل 60% من الإعلانات العقارية التقليدية؟ استكشف كيف تساعدك باقات متجر عقارات النخبة (التصوير السينمائي، التقييم المعتمد، وحاسبة التمويل الذكية) على إغلاق الصفقات بأعلى سعر وبسرعة قياسية.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between">
+            <span class="text-xs text-slate-400">أ. فيصل السبيعي</span>
+            <div class="flex items-center gap-2">
+              <a href="article-2.html" class="text-xs font-bold text-black bg-[#D4AF37] px-3 py-1.5 rounded-lg hover:bg-yellow-400 transition flex items-center gap-1">
+                <span>المقال كاملاً</span>
+                <i data-lucide="arrow-left" class="w-3 h-3"></i>
+              </a>
+              <button onclick="openArticle('art-platform-tools')" class="text-xs text-slate-400 hover:text-white transition">
+                سريع
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Article 2 -->
+      <article class="luxury-card rounded-2xl overflow-hidden flex flex-col justify-between">
+        <div class="h-48 relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="التمويل العقاري" class="w-full h-full object-cover">
+          <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#0D1527]/90 text-[#D4AF37] border border-[#D4AF37]/30">
+            تمويل وبنوك
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[11px] text-slate-400">قراءة في 4 دقائق</span>
+            <h3 class="text-base font-bold text-white mt-1 leading-snug">
+              كيف تختار أفضل برنامج تمويل عقاري بنكي بهامش ربح تنافسي وتتجنب الفوائد المركبة؟
+            </h3>
+            <p class="text-xs text-slate-300 mt-2 line-clamp-3 leading-relaxed">
+              شرح مبسط لكيفية احتساب السايبر (SAIBOR)، والفرق بين المرابحة والإجارة، وكيفية استغلال الدعم السكني والدفعة الأولى لتخفيض القسط الشهري لأدنى حد ممكن.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between">
+            <span class="text-xs text-slate-400">أكتوبر 2026</span>
+            <button onclick="openArticle('art-2')" class="text-xs font-bold text-[#D4AF37] hover:underline flex items-center gap-1">
+              <span>إكمال القراءة</span>
+              <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="luxury-card rounded-2xl overflow-hidden flex flex-col justify-between">
+        <div class="h-48 relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="بنتهاوس وشقق جدة" class="w-full h-full object-cover">
+          <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#0D1527]/90 text-[#D4AF37] border border-[#D4AF37]/30">
+            شقق وبنتهاوس
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[11px] text-slate-400">قراءة في 5 دقائق</span>
+            <h3 class="text-base font-bold text-white mt-1 leading-snug">
+              مقارنة الاستثمار بين فلل الرياض المستقلة وشقق البنتهاوس البحرية في جدة
+            </h3>
+            <p class="text-xs text-slate-300 mt-2 line-clamp-3 leading-relaxed">
+              مقارنة رقمية شاملة توضح نسبة الإشغال السنوي، تكاليف الصيانة الدورية، ومعدل نمو رأس المال لكلا النوعين من العقارات الفاخرة بالمملكة.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between">
+            <span class="text-xs text-slate-400">أكتوبر 2026</span>
+            <button onclick="openArticle('art-3')" class="text-xs font-bold text-[#D4AF37] hover:underline flex items-center gap-1">
+              <span>إكمال القراءة</span>
+              <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 4 -->
+      <article class="luxury-card rounded-2xl overflow-hidden flex flex-col justify-between">
+        <div class="h-48 relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="رخصة فال والعقود" class="w-full h-full object-cover">
+          <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#0D1527]/90 text-[#D4AF37] border border-[#D4AF37]/30">
+            أنظمة وتشريعات
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[11px] text-slate-400">قراءة في 3 دقائق</span>
+            <h3 class="text-base font-bold text-white mt-1 leading-snug">
+              ما هي رخصة فال العقارية؟ ولماذا تحميك العقود الموثقة إلكترونياً عند الشراء؟
+            </h3>
+            <p class="text-xs text-slate-300 mt-2 line-clamp-3 leading-relaxed">
+              تعرف على حقوقك النظامية كمشترٍ ومستثمر، وكيف تضمن منصة عقارات النخبة المعتمدة حماية العربون والإفراغ الفوري عبر البورصة العقارية.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 mt-4 flex items-center justify-between">
+            <span class="text-xs text-slate-400">أكتوبر 2026</span>
+            <button onclick="openArticle('art-4')" class="text-xs font-bold text-[#D4AF37] hover:underline flex items-center gap-1">
+              <span>إكمال القراءة</span>
+              <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- ================= ARTICLE READING MODAL ================= -->
+  <div id="article-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-[#0D1527] border border-[#D4AF37]/40 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-2xl">
+      <button onclick="closeArticleModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-[#080E1E] text-slate-300 hover:text-white flex items-center justify-center transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div id="article-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#050811] border-t border-[#D4AF37]/20 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-400 space-y-3">
+      <div class="flex justify-center gap-6 text-[#D4AF37] font-semibold">
+        <a href="index.html" class="hover:underline">الرئيسية</a>
+        <a href="blog.html" class="hover:underline">المدونة</a>
+        <a href="about.html" class="hover:underline">من نحن</a>
+        <a href="contact.html" class="hover:underline">اتصل بنا</a>
+        <a href="privacy.html" class="hover:underline">سياسة الخصوصية</a>
+        <a href="terms.html" class="hover:underline">شروط الاستخدام</a>
+      </div>
+      <div>جميع الحقوق محفوظة © 2026 - عقارات النخبة • رخصة فال رقم 1200049210</div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const articlesContent = {
+      'art-elite-guide': {
+        title: "دليلك الشامل لامتلاك عقار فاخر في المملكة 2026: كيف تُحدث منصة 'عقارات النخبة' ثورة في الوساطة والاستثمار الآمن؟",
+        author: "د. راشد التميمي • خبير استثماري وتمويلي معتمد",
+        date: "أكتوبر 2026 • قراءة متعمقة في 8 دقائق • E-E-A-T Verified",
+        content: `
+          <div class="space-y-5 text-slate-300 leading-relaxed text-sm sm:text-base">
+            <p class="text-base sm:text-lg font-semibold text-white leading-relaxed border-r-4 border-[#D4AF37] pr-4 bg-[#080E1E] p-3 rounded-l-xl">
+              "العقار ليس مجرد جدران وأسمنت، بل هو الملاذ الآمن لثروتك وحجر الزاوية لمستقبل عائلتك. ومع تسارع وتيرة التطور العمراني في المملكة في ظل رؤية 2030، أصبحت قرارات الشراء بحاجة إلى علم دقيق وأدوات موثوقة تحميك من العشوائية."
+            </p>
+
+            <h3 class="text-lg sm:text-xl font-bold text-[#D4AF37] mt-6 flex items-center gap-2">
+              <span>1. التجربة الميدانية: شتات البحث القديم مقابل الحل الذكي</span>
+            </h3>
+            <p>
+              لعقود طويلة، كانت رحلة البحث عن فيلا راقية أو قصر في الرياض وجدة مرهقة ومحفوفة بالمخاطر؛ إعلانات وهمية، صور لا تعكس الواقع، مسوقون غير مرخصين، ومفاجآت غير سارة في الصكوك أو البناء بعد دفع العربون.
+            </p>
+            <p>
+              هنا تحديداً صنعت <strong>منصة عقارات النخبة</strong> الفارق؛ حيث أسسنا بيئة وساطة رقمية متكاملة تخضع لفلترة دقيقة قبل نشر أي أصل عقاري:
+            </p>
+            <ul class="list-disc list-inside space-y-2 bg-[#080E1E] p-4 rounded-2xl border border-slate-800 text-sm">
+              <li><strong>فحص الصك الإلكتروني:</strong> التأكد من الصكوك المفروزة وعدم وجود أي رهون أو موانع تصرف نظامية.</li>
+              <li><strong>الضمانات الإنشائية الإلزامية:</strong> ربط العروض بتأمين العيوب الخفية (ملاذ) لمدة 10 سنوات وشهادات إتمام البناء والكود السعودي.</li>
+              <li><strong>المعاينة الواقعية والشفافة:</strong> توفير مقاطع فيديو 4K ولقطات جوية تكشف الحي، والشارع، والموقع الجغرافي بكل أمانة.</li>
+            </ul>
+
+            <h3 class="text-lg sm:text-xl font-bold text-[#D4AF37] mt-6 flex items-center gap-2">
+              <span>2. التخصص المالي: كيف تستخدم حاسبة التمويل بالمنصة لحساب خطتك؟</span>
+            </h3>
+            <p>
+              أحد أكبر الأخطاء التي يقع فيها المشترون هو البدء بمعاينة العقارات دون معرفة قدرتهم الائتمانية الدقيقة. في منصة عقارات النخبة، وفرنا لك في الصفحة الرئيسية <strong>"حاسبة التمويل العقاري الذكية"</strong> المصممة وفق معايير البنك المركزي السعودي (ساما).
+            </p>
+            <div class="p-4 bg-gradient-to-br from-[#080E1E] to-[#131F3D] rounded-2xl border border-[#D4AF37]/30">
+              <h4 class="font-bold text-white mb-2 text-sm">💡 خطوات عملية للاستفادة القصوى من الحاسبة:</h4>
+              <p class="text-xs sm:text-sm text-slate-300">
+                1. أدخل القيمة الإجمالية للعقار (مثلاً: 3,500,000 ريال).<br>
+                2. حدد الدفعة الأولى المتوفرة لديك (ننصح دائماً بـ 20% فأكثر لتقليل إجمالي الأرباح المركبة).<br>
+                3. اختر مدة التمويل (من 10 إلى 25 سنة)، وستظهر لك الحاسبة القسط الشهري التقريبي، وتكلفة الأجل، ومقدار الاستقطاع المسموح نظامياً من دخلك.
+              </p>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold text-[#D4AF37] mt-6 flex items-center gap-2">
+              <span>3. الموثوقية والأمان: رخصة فال (1200049210) والإفراغ الإلكتروني</span>
+            </h3>
+            <p>
+              الأمان المالي والنظامي هو خط أحمر. تعمل منصة عقارات النخبة تحت مظلة <strong>الهيئة العامة للعقار برخصة فال رقم (1200049210)</strong>، مما يعني:
+            </p>
+            <ul class="list-disc list-inside space-y-1.5 text-sm">
+              <li>عقود وساطة وتسويق موثقة برقم إعلان رسمي ملزم أمام الجهات القضائية.</li>
+              <li>دفع العربون وحفظه في حسابات الضمان النظامية المعتمدة لحين اكتمال الشروط.</li>
+              <li>الإفراغ العقاري الفوري ونقل الملكية عبر البورصة العقارية بوزارة العدل خلال دقائق معدودة.</li>
+            </ul>
+
+            <div class="mt-8 p-5 bg-[#D4AF37]/10 border border-[#D4AF37] rounded-2xl text-center">
+              <h4 class="font-black text-[#D4AF37] text-base mb-1">جاهز لبدء رحلتك العقارية الراقية؟</h4>
+              <p class="text-xs sm:text-sm text-slate-300 mb-4">تواصل مباشرة مع أحد مستشارينا المعتمدين لترتيب جولة معاينة خاصة أو استشارة تمويلية مخصصة.</p>
+              <a href="https://wa.me/966509876543?text=مرحباً،%20قرأت%20دليل%20الاستثمار%20العقاري%20وأرغب%20في%20استشارة%20خاصة" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black text-xs shadow-lg hover:brightness-110 transition">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>طلب استشارة VIP فورية عبر واتساب</span>
+              </a>
+            </div>
+          </div>
+        `
+      },
+      'art-platform-tools': {
+        title: "من حاسبة التمويل إلى التصوير بالدرون: 5 خدمات حصرية في 'عقارات النخبة' ترفع قيمة عقارك وتختصر 70% من وقت البيع",
+        author: "أ. فيصل السبيعي • مدير تطوير الأعمال والتقييم العقاري",
+        date: "أكتوبر 2026 • قراءة عملية في 6 دقائق • دليل الملاك",
+        content: `
+          <div class="space-y-5 text-slate-300 leading-relaxed text-sm sm:text-base">
+            <p class="text-base sm:text-lg font-semibold text-white leading-relaxed border-r-4 border-[#D4AF37] pr-4 bg-[#080E1E] p-3 rounded-l-xl">
+              "كثير من الملاك يتساءلون: لماذا يبقى عقاري معروضاً لأشهر طويلة دون مشترٍ جاد بينما تباع فيلا مماثلة في نفس الحي خلال أسبوعين؟ السر يكمن في طريقة العرض، دقة التسعير، والوصول إلى المشتري الحقيقي المناسب."
+            </p>
+
+            <h3 class="text-lg sm:text-xl font-bold text-[#D4AF37] mt-6">1. لماذا تفشل الإعلانات التقليدية؟</h3>
+            <p>
+              تشير دراسات السوق العقاري إلى أن <strong>أكثر من 65% من الإعلانات العقارية</strong> لا تلفت انتباه المشترين المؤهلين لسببين رئيسيين:
+            </p>
+            <ol class="list-decimal list-inside space-y-1.5 text-sm bg-[#080E1E] p-4 rounded-xl border border-slate-800">
+              <li><strong>سوء التصوير والإخراج:</strong> صور ملتقطة بعدسات هاتف رديئة، إضاءة خافتة، وزوايا ضيقة تخفي جمال التصميم.</li>
+              <li><strong>التسعير العاطفي غير المدروس:</strong> عرض العقار بسعر أعلى من قيمته السوقية العادلة مما يحرقه في أعين الوسطاء والمشترين.</li>
+            </ol>
+
+            <h3 class="text-lg sm:text-xl font-bold text-[#D4AF37] mt-6">2. باقات متجر عقارات النخبة الحصرية: نقلة نوعية في التسويق</h3>
+            <p>
+              خصصنا في منصتنا قسماً مستقلاً هو <strong>"متجر الخدمات العقارية"</strong> (Store) لتمكين الملاك والمطورين من طلب حلول احترافية جاهزة بضغطة زر:
+            </p>
+            
+            <div class="space-y-4 my-4">
+              <div class="p-4 bg-[#080E1E] rounded-2xl border border-[#D4AF37]/30">
+                <h4 class="font-bold text-[#D4AF37] text-base mb-1 flex items-center gap-2">
+                  <i data-lucide="video" class="w-4 h-4"></i>
+                  أ. باقة التصوير السينمائي والدرون الجوي (4K Drone Video):
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-300">
+                  فريق تصوير محترف ينزل لموقع العقار مزوداً بطائرات درون مرخصة وكاميرات سينمائية كاملة الإطار لتصوير الواجهات، والشوارع المحيطة، والمساحات الداخلية بتقنية HDR، مما يمنح المشتري البعيد انطباعاً مبهراً كأنه يقف في بهو الفيلا.
+                </p>
+              </div>
+
+              <div class="p-4 bg-[#080E1E] rounded-2xl border border-[#D4AF37]/30">
+                <h4 class="font-bold text-[#D4AF37] text-base mb-1 flex items-center gap-2">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                  ب. خدمة التقييم العقاري المعتمد (معايير تقييم):
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-300">
+                  تقرير تقييم رسمي صادر من مقيمين معتمدين يفحص صلب البناء والتشطيبات ومقارنة الصفقات الفعلية المنفذة في البورصة العقارية، ليعطيك السعر العادل القابل للتنفيذ السريع بدون أي بخس.
+                </p>
+              </div>
+
+              <div class="p-4 bg-[#080E1E] rounded-2xl border border-[#D4AF37]/30">
+                <h4 class="font-bold text-[#D4AF37] text-base mb-1 flex items-center gap-2">
+                  <i data-lucide="trending-up" class="w-4 h-4"></i>
+                  ج. الحملات الرقمية الموجهة VIP:
+                </h4>
+                <p class="text-xs sm:text-sm text-slate-300">
+                  استهداف مباشر لقاعدة بيانات تضم كبار المستثمرين ورجال الأعمال في المملكة والخليج، وعرض العقار في الصدارة بالصفحة الرئيسية للمنصة.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold text-[#D4AF37] mt-6">3. كيف تعرض عقارك في منصة عقارات النخبة؟</h3>
+            <p>
+              الأمر بسيط ومتاح لكل مالك ومطور: يمكنك الضغط على زر <strong>"إضافة عقار"</strong> في أعلى المنصة، وتعبئة بيانات الفيلا أو الأرض ورقم الترخيص، وسيقوم فريق العمل بفحص الطلب ومراجعة الصك ونشره في أقل من 24 ساعة.
+            </p>
+
+            <div class="mt-8 p-5 bg-[#080E1E] border border-slate-700 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h4 class="font-bold text-white text-sm">هل تملك عقاراً فاخراً وترغب في تسويقه؟</h4>
+                <p class="text-xs text-slate-400 mt-1">تصفح متجر الخدمات أو تحدث مع فريق التسويق لدينا لطلب خطة عمل متكاملة.</p>
+              </div>
+              <a href="store.html" class="px-5 py-2.5 rounded-xl bg-[#D4AF37] text-black font-extrabold text-xs shadow hover:bg-yellow-400 transition whitespace-nowrap">
+                زيارة متجر الخدمات
+              </a>
+            </div>
+          </div>
+        `
+      },
+      'art-1': {
+        title: "دليل الاستثمار في فلل شمال الرياض 2026: أحياء النرجس، حطين، والملقا",
+        author: "م. عبدالله الشمري • خبير استثماري معتمد",
+        date: "أكتوبر 2026 • قراءة في 6 دقائق",
+        content: `
+          <p class="mb-4">تعتبر أحياء شمال مدينة الرياض، وتحديداً حطين والنرجس والملقا والعارض، البوصلة الذهبية للمستثمرين وأصحاب رؤوس الأموال الباحثين عن النمو الرأسمالي والعوائد الإيجارية المرتفعة.</p>
+          <h4 class="text-base font-bold text-[#D4AF37] my-3">1. حي حطين: عاصمة القصور الملكية والفخامة</h4>
+          <p class="mb-4">يتميز حي حطين بقربه المباشر من مركز الملك عبدالله المالي (KAFD) وبوليفارد رياض سيتي، مما جعله الوجهة الأولى للدبلوماسيين وكبار التنفيذيين، مع استقرار أسعار المتر المربع وتصاعدها السنوي بمعدل يتراوح بين 9% إلى 14%.</p>
+          <h4 class="text-base font-bold text-[#D4AF37] my-3">2. حي النرجس: مستقبل المشاريع الذكية والمترو</h4>
+          <p class="mb-4">يمثل حي النرجس النموذج الأمثل للأحياء المتكاملة، حيث تتوفر فيه شبكات تصريف السيول، والألياف البصرية، ومحطات المترو المتصلة بالمطار مباشرة، مما يجعله الخيار الأول للفلل المودرن الذكية وشقق البنتهاوس الراقية.</p>
+          <h4 class="text-base font-bold text-[#D4AF37] my-3">نصيحة عقارات النخبة للمشتري:</h4>
+          <p class="p-4 bg-[#080E1E] rounded-xl border border-slate-800 text-slate-300">
+            احرص دائماً على التأكد من وجود شهادة إتمام البناء والضمانات الإنشائية (ضمان ملاذ ضد العيوب الخفية لمدة 10 سنوات) والتأكد من صك الملكية الإلكتروني المحدث عبر منصة عقارات النخبة المعتمدة.
+          </p>
+        `
+      },
+      'art-2': {
+        title: "كيف تختار أفضل برنامج تمويل عقاري بنكي بهامش ربح تنافسي وتتجنب الفوائد المركبة؟",
+        author: "فريق التمويل البنكي • عقارات النخبة",
+        date: "أكتوبر 2026 • قراءة في 4 دقائق",
+        content: `
+          <p class="mb-4">شراء العقار عبر التمويل البنكي خطوة مصيرية تتطلب دراسة متأنية لهيكل التمويل ومعدلات الفائدة السنوية المتغيرة والثابتة.</p>
+          <h4 class="text-base font-bold text-[#D4AF37] my-3">أبرز النقاط الجوهرية قبل توقيع العقد:</h4>
+          <ul class="list-disc list-inside space-y-2 mb-4 text-slate-300">
+            <li><strong>معدل النسبة السنوي (APR):</strong> لا تنظر فقط إلى هامش الربح المعلن، بل قارن معدل النسبة السنوي الذي يشتمل على الرسوم الإدارية ورسوم التقييم والتأمين التكافلي.</li>
+            <li><strong>الدفعة الأولى:</strong> زيادة الدفعة الأولى من 10% إلى 20% تخفض القسط الشهري بأكثر من 15% وتقلل إجمالي الفوائد التراكمية على المدى الطويل.</li>
+            <li><strong>إمكانية السداد المبكر:</strong> تأكد من بند السداد المبكر الذي يتيح لك إسقاط الأرباح المستقبلية عند توفر سيولة نقدية.</li>
+          </ul>
+        `
+      },
+      'art-3': {
+        title: "مقارنة الاستثمار بين فلل الرياض المستقلة وشقق البنتهاوس البحرية في جدة",
+        author: "أ. سارة القحطاني • مستشارة وساطة عقارية",
+        date: "أكتوبر 2026 • قراءة في 5 دقائق",
+        content: `
+          <p class="mb-4">يحتار الكثير من المستثمرين بين التوسع في فلل العاصمة الرياض المستقلة أو الاستثمار في الشقق الفندقية والبنتهاوس المطل على كورنيش جدة وأبحر الشمالية.</p>
+          <p class="mb-4"><strong>فلل الرياض:</strong> تحقق نمواً رأسمالياً أعلى في قيمة الأرض على المدى المتوسط والطويل (Capital Appreciation).</p>
+          <p class="mb-4"><strong>بنتهاوس جدة:</strong> يحقق عائداً إيجارياً نقدياً فورياً أعلى (Cash Flow Yield) بنظام التأجير الفندقي والسياحي خاصة في مواسم الفعاليات والترفيه.</p>
+        `
+      },
+      'art-4': {
+        title: "ما هي رخصة فال العقارية؟ ولماذا تحميك العقود الموثقة إلكترونياً عند الشراء؟",
+        author: "المستشار القانوني العقاري",
+        date: "أكتوبر 2026 • قراءة في 3 دقائق",
+        content: `
+          <p class="mb-4">رخصة فال هي الوثيقة الرسمية الصادرة من الهيئة العامة للعقار بالمملكة العربية السعودية، والتي تؤهل المنشآت والأفراد لممارسة أنشطة الوساطة والتسويق العقاري باحترافية ونزاهة.</p>
+          <p class="mb-4">في عقارات النخبة (رخصة رقم: 1200049210)، نلتزم بربط جميع الصفقات عبر المنصة الوطنية الموحدة لضمان أمان أموالك وحفظ حقوق البائع والمشتري بشكل إلكتروني كامل ودون أي نزاعات قضائية.</p>
+        `
+      }
+    };
+
+    function openArticle(key) {
+      const art = articlesContent[key];
+      if (!art) return;
+      document.getElementById('article-body').innerHTML = `
+        <div class="mb-6">
+          <span class="text-xs font-mono text-[#D4AF37]">${art.date}</span>
+          <h2 class="text-2xl font-black text-white mt-1 leading-snug">${art.title}</h2>
+          <div class="text-xs text-slate-400 mt-2 font-bold">${art.author}</div>
+        </div>
+        <div class="text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-6">
+          ${art.content}
+        </div>
+        <div class="mt-8 pt-6 border-t border-slate-800 flex justify-between items-center">
+          <a href="contact.html" class="px-5 py-2.5 rounded-xl bg-[#D4AF37] text-black font-extrabold text-xs shadow hover:bg-yellow-400 transition">
+            استشر خبيراً عقارياً الآن
+          </a>
+          <button onclick="closeArticleModal()" class="px-4 py-2 rounded-xl bg-[#080E1E] text-slate-300 text-xs font-bold hover:bg-slate-800 transition">
+            إغلاق
+          </button>
+        </div>
+      `;
+      document.getElementById('article-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeArticleModal() {
+      document.getElementById('article-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

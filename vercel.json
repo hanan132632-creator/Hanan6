@@ -22,36 +22,7 @@
       "source": "/web/:path*",
       "destination": "/:path*",
       "permanent": true
-    },
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/index",
-      "destination": "/",
-      "permanent": true
     }
-  ],
-  "rewrites": [
-    { "source": "/robots.txt", "destination": "/web/robots.txt" },
-    { "source": "/sitemap.xml", "destination": "/web/sitemap.xml" },
-    { "source": "/ads.txt", "destination": "/web/ads.txt" },
-    { "source": "/app-ads.txt", "destination": "/web/app-ads.txt" },
-    { "source": "/manifest.json", "destination": "/web/manifest.json" },
-    { "source": "/404", "destination": "/web/404.html" },
-    { "source": "/404.html", "destination": "/web/404.html" },
-    { "source": "/blog", "destination": "/web/blog.html" },
-    { "source": "/article-1", "destination": "/web/article-1.html" },
-    { "source": "/article-2", "destination": "/web/article-2.html" },
-    { "source": "/store", "destination": "/web/store.html" },
-    { "source": "/about", "destination": "/web/about.html" },
-    { "source": "/contact", "destination": "/web/contact.html" },
-    { "source": "/privacy", "destination": "/web/privacy.html" },
-    { "source": "/terms", "destination": "/web/terms.html" },
-    { "source": "/", "destination": "/web/index.html" },
-    { "source": "/:match*", "destination": "/web/:match*" }
   ],
   "headers": [
     {
