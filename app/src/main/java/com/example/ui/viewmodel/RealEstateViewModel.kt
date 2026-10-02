@@ -26,8 +26,11 @@ import java.net.URLEncoder
 enum class AppTab {
     HOME,
     SEARCH,
+    BLOG,
+    STORE,
     CALCULATOR,
     FAVORITES,
+    MORE,
     CONTACT
 }
 

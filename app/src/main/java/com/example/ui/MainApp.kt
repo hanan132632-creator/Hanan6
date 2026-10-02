@@ -58,8 +58,15 @@ fun MainApp(
     val monetagSmartLink by viewModel.monetagSmartLink.collectAsStateWithLifecycle()
     val smartLinkClicks by viewModel.smartLinkClicks.collectAsStateWithLifecycle()
 
-    // Handle back button: return to Home if on another tab
-    if (selectedTab != AppTab.HOME) {
+    // Sub-screen state inside MORE tab
+    var selectedLegalContent by remember { mutableStateOf<LegalContentType?>(null) }
+
+    // Handle back button: return to Home if on another tab or subscreen
+    if (selectedLegalContent != null) {
+        BackHandler {
+            selectedLegalContent = null
+        }
+    } else if (selectedTab != AppTab.HOME) {
         BackHandler {
             viewModel.selectTab(AppTab.HOME)
         }
@@ -71,53 +78,12 @@ fun MainApp(
             modifier = Modifier.fillMaxSize(),
             containerColor = LuxuryNavyDark,
             topBar = {
-                Column {
-                    if (onSwitchToWebView != null) {
-                        Surface(
-                            color = Color(0xFF0D172E),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .statusBarsPadding()
-                                    .padding(horizontal = 16.dp, vertical = 6.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = "📱 أنت في وضع تطبيق الأندرويد",
-                                    color = Color(0xFF94A3B8),
-                                    fontSize = 11.sp
-                                )
-                                Button(
-                                    onClick = onSwitchToWebView,
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = LuxuryGold,
-                                        contentColor = Color.Black
-                                    ),
-                                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
-                                    shape = RoundedCornerShape(8.dp),
-                                    modifier = Modifier.height(28.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Language,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(13.dp)
-                                    )
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text("عرض الموقع الإلكتروني", fontSize = 11.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
-                                }
-                            }
-                        }
-                    }
-                    TopHeader(
-                        unreadNotificationsCount = unreadNotifsCount,
-                        onNotificationClick = { viewModel.setShowNotificationsDialog(true) },
-                        onSettingsClick = { viewModel.setShowSettingsDialog(true) },
-                        onAdClick = { viewModel.openInAppAdPreview() }
-                    )
-                }
+                TopHeader(
+                    unreadNotificationsCount = unreadNotifsCount,
+                    onNotificationClick = { viewModel.setShowNotificationsDialog(true) },
+                    onSettingsClick = { viewModel.setShowSettingsDialog(true) },
+                    onAdClick = { viewModel.openInAppAdPreview() }
+                )
             },
             bottomBar = {
                 NavigationBar(
@@ -130,7 +96,10 @@ fun MainApp(
                 ) {
                     NavigationBarItem(
                         selected = selectedTab == AppTab.HOME,
-                        onClick = { viewModel.selectTab(AppTab.HOME) },
+                        onClick = {
+                            selectedLegalContent = null
+                            viewModel.selectTab(AppTab.HOME)
+                        },
                         icon = {
                             Icon(
                                 imageVector = if (selectedTab == AppTab.HOME) Icons.Filled.Home else Icons.Outlined.Home,
@@ -140,7 +109,7 @@ fun MainApp(
                         label = {
                             Text(
                                 text = "الرئيسية",
-                                fontSize = 11.sp
+                                fontSize = 10.sp
                             )
                         },
                         colors = NavigationBarItemDefaults.colors(
@@ -154,18 +123,21 @@ fun MainApp(
                     )
 
                     NavigationBarItem(
-                        selected = selectedTab == AppTab.SEARCH,
-                        onClick = { viewModel.selectTab(AppTab.SEARCH) },
+                        selected = selectedTab == AppTab.BLOG,
+                        onClick = {
+                            selectedLegalContent = null
+                            viewModel.selectTab(AppTab.BLOG)
+                        },
                         icon = {
                             Icon(
-                                imageVector = if (selectedTab == AppTab.SEARCH) Icons.Filled.Search else Icons.Outlined.Search,
-                                contentDescription = "بحث"
+                                imageVector = if (selectedTab == AppTab.BLOG) Icons.Filled.MenuBook else Icons.Outlined.MenuBook,
+                                contentDescription = "المدونة"
                             )
                         },
                         label = {
                             Text(
-                                text = "بحث",
-                                fontSize = 11.sp
+                                text = "المدونة",
+                                fontSize = 10.sp
                             )
                         },
                         colors = NavigationBarItemDefaults.colors(
@@ -175,12 +147,43 @@ fun MainApp(
                             unselectedIconColor = TextSecondary,
                             unselectedTextColor = TextSecondary
                         ),
-                        modifier = Modifier.testTag("tab_search")
+                        modifier = Modifier.testTag("tab_blog")
+                    )
+
+                    NavigationBarItem(
+                        selected = selectedTab == AppTab.STORE,
+                        onClick = {
+                            selectedLegalContent = null
+                            viewModel.selectTab(AppTab.STORE)
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = if (selectedTab == AppTab.STORE) Icons.Filled.ShoppingBag else Icons.Outlined.ShoppingBag,
+                                contentDescription = "المتجر"
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = "المتجر",
+                                fontSize = 10.sp
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Black,
+                            selectedTextColor = LuxuryGold,
+                            indicatorColor = LuxuryGold,
+                            unselectedIconColor = TextSecondary,
+                            unselectedTextColor = TextSecondary
+                        ),
+                        modifier = Modifier.testTag("tab_store")
                     )
 
                     NavigationBarItem(
                         selected = selectedTab == AppTab.CALCULATOR,
-                        onClick = { viewModel.selectTab(AppTab.CALCULATOR) },
+                        onClick = {
+                            selectedLegalContent = null
+                            viewModel.selectTab(AppTab.CALCULATOR)
+                        },
                         icon = {
                             Icon(
                                 imageVector = if (selectedTab == AppTab.CALCULATOR) Icons.Filled.Calculate else Icons.Outlined.Calculate,
@@ -190,7 +193,7 @@ fun MainApp(
                         label = {
                             Text(
                                 text = "الحاسبة",
-                                fontSize = 11.sp
+                                fontSize = 10.sp
                             )
                         },
                         colors = NavigationBarItemDefaults.colors(
@@ -205,7 +208,10 @@ fun MainApp(
 
                     NavigationBarItem(
                         selected = selectedTab == AppTab.FAVORITES,
-                        onClick = { viewModel.selectTab(AppTab.FAVORITES) },
+                        onClick = {
+                            selectedLegalContent = null
+                            viewModel.selectTab(AppTab.FAVORITES)
+                        },
                         icon = {
                             Icon(
                                 imageVector = if (selectedTab == AppTab.FAVORITES) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
@@ -215,7 +221,7 @@ fun MainApp(
                         label = {
                             Text(
                                 text = "المفضلة",
-                                fontSize = 11.sp
+                                fontSize = 10.sp
                             )
                         },
                         colors = NavigationBarItemDefaults.colors(
@@ -229,18 +235,21 @@ fun MainApp(
                     )
 
                     NavigationBarItem(
-                        selected = selectedTab == AppTab.CONTACT,
-                        onClick = { viewModel.selectTab(AppTab.CONTACT) },
+                        selected = selectedTab == AppTab.MORE,
+                        onClick = {
+                            selectedLegalContent = null
+                            viewModel.selectTab(AppTab.MORE)
+                        },
                         icon = {
                             Icon(
-                                imageVector = if (selectedTab == AppTab.CONTACT) Icons.Filled.Phone else Icons.Outlined.Phone,
-                                contentDescription = "اتصل بنا"
+                                imageVector = if (selectedTab == AppTab.MORE) Icons.Filled.MoreHoriz else Icons.Outlined.MoreHoriz,
+                                contentDescription = "المزيد"
                             )
                         },
                         label = {
                             Text(
-                                text = "اتصل بنا",
-                                fontSize = 11.sp
+                                text = "المزيد",
+                                fontSize = 10.sp
                             )
                         },
                         colors = NavigationBarItemDefaults.colors(
@@ -250,7 +259,7 @@ fun MainApp(
                             unselectedIconColor = TextSecondary,
                             unselectedTextColor = TextSecondary
                         ),
-                        modifier = Modifier.testTag("tab_contact")
+                        modifier = Modifier.testTag("tab_more")
                     )
                 }
             }
@@ -302,6 +311,21 @@ fun MainApp(
                         )
                     }
 
+                    AppTab.BLOG -> {
+                        BlogScreen(
+                            onWhatsAppShare = { msg -> viewModel.openWhatsApp(context, null, msg) }
+                        )
+                    }
+
+                    AppTab.STORE -> {
+                        StoreScreen(
+                            onOrderServiceClick = { product ->
+                                val msg = "طلب خدمة عقارية خاصة من متجر النخبة:\nالخدمة: *${product.title}*\nالسعر: *${product.priceSar}*\nأرجو تزويدي بكيفية السداد والموعد المتاح."
+                                viewModel.openWhatsApp(context, null, msg)
+                            }
+                        )
+                    }
+
                     AppTab.CALCULATOR -> {
                         CalculatorScreen(
                             simulation = currentMortgageSimulation,
@@ -330,6 +354,34 @@ fun MainApp(
                             onToggleFavorite = { viewModel.toggleFavorite(it) },
                             onExploreClick = { viewModel.selectTab(AppTab.HOME) }
                         )
+                    }
+
+                    AppTab.MORE -> {
+                        if (selectedLegalContent != null) {
+                            LegalScreen(
+                                contentType = selectedLegalContent!!,
+                                onBackClick = { selectedLegalContent = null }
+                            )
+                        } else {
+                            MoreMenuScreen(
+                                onNavigateToBlog = { viewModel.selectTab(AppTab.BLOG) },
+                                onNavigateToStore = { viewModel.selectTab(AppTab.STORE) },
+                                onNavigateToLegal = { type -> selectedLegalContent = type },
+                                onNavigateToContact = { viewModel.selectTab(AppTab.CONTACT) },
+                                onOpenWebBrowser = {
+                                    try {
+                                        val intent = android.content.Intent(
+                                            android.content.Intent.ACTION_VIEW,
+                                            android.net.Uri.parse("https://hanan.pro")
+                                        ).apply { flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK }
+                                        context.startActivity(intent)
+                                    } catch (e: Exception) {
+                                        // ignore
+                                    }
+                                },
+                                onOpenMonetagSettings = { viewModel.setShowSettingsDialog(true) }
+                            )
+                        }
                     }
 
                     AppTab.CONTACT -> {
