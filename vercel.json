@@ -2,27 +2,31 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/web",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/web/index.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/web/index",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/web/:path*",
-      "destination": "/:path*",
-      "permanent": true
-    }
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/index", "destination": "/index.html" },
+    { "source": "/index.html", "destination": "/index.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/blog.html", "destination": "/blog.html" },
+    { "source": "/store", "destination": "/store.html" },
+    { "source": "/store.html", "destination": "/store.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/about.html", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/contact.html", "destination": "/contact.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/privacy.html", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/terms.html", "destination": "/terms.html" },
+    { "source": "/article-1", "destination": "/article-1.html" },
+    { "source": "/article-1.html", "destination": "/article-1.html" },
+    { "source": "/article-2", "destination": "/article-2.html" },
+    { "source": "/article-2.html", "destination": "/article-2.html" },
+    { "source": "/article-3", "destination": "/article-3.html" },
+    { "source": "/article-3.html", "destination": "/article-3.html" },
+    { "source": "/web", "destination": "/index.html" },
+    { "source": "/web/", "destination": "/index.html" },
+    { "source": "/web/:path*", "destination": "/:path*" }
   ],
   "headers": [
     {
@@ -32,6 +36,22 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "X-XSS-Protection", "value": "1; mode=block" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/app-elite-realestate.apk",
+      "headers": [
+        { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"app-elite-realestate.apk\"" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/app-elite-realestate.aab",
+      "headers": [
+        { "key": "Content-Type", "value": "application/octet-stream" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"app-elite-realestate.aab\"" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     },
     {
