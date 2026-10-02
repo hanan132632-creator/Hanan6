@@ -1,6 +1,8 @@
 package com.example.ui.screens
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -18,14 +20,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.data.local.ArticleStatsEntity
 import com.example.ui.theme.*
+import java.text.NumberFormat
+import java.util.Locale
 
 data class BlogArticle(
     val id: String,
@@ -107,13 +112,28 @@ val sampleArticles = listOf(
 
 @Composable
 fun BlogScreen(
-    onArticleClick: (BlogArticle) -> Unit = {},
+    articleStats: Map<String, ArticleStatsEntity> = emptyMap(),
+    onArticleViewed: (String) -> Unit = {},
+    onArticleLiked: (String) -> Unit = {},
     onWhatsAppShare: (String) -> Unit = {}
 ) {
+    val numberFormat = remember { NumberFormat.getNumberInstance(Locale.US) }
     var selectedArticleForRead by remember { mutableStateOf<BlogArticle?>(null) }
 
     if (selectedArticleForRead != null) {
         val article = selectedArticleForRead!!
+        val stat = articleStats[article.id]
+        val isLiked = stat?.isLikedByUser == true
+        val likesCount = stat?.likesCount ?: 0
+        val viewsCount = stat?.viewsCount ?: 0
+
+        // Scale animation for like button
+        val scale by animateFloatAsState(
+            targetValue = if (isLiked) 1.25f else 1.0f,
+            animationSpec = spring(dampingRatio = 0.4f, stiffness = 400f),
+            label = "likeScale"
+        )
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -124,24 +144,52 @@ fun BlogScreen(
             item {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    IconButton(
-                        onClick = { selectedArticleForRead = null },
-                        colors = IconButtonDefaults.iconButtonColors(
-                            containerColor = LuxuryNavyMedium,
-                            contentColor = LuxuryGold
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(
+                            onClick = { selectedArticleForRead = null },
+                            colors = IconButtonDefaults.iconButtonColors(
+                                containerColor = LuxuryNavyMedium,
+                                contentColor = LuxuryGold
+                            )
+                        ) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "رجوع")
+                        }
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = "تفاصيل المقال",
+                            color = Color.White,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
                         )
-                    ) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "رجوع")
                     }
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text(
-                        text = "تفاصيل المقال",
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+
+                    // Interactive Like Action in header
+                    FilledTonalButton(
+                        onClick = { onArticleLiked(article.id) },
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = if (isLiked) DangerRed.copy(alpha = 0.25f) else LuxuryNavyMedium,
+                            contentColor = if (isLiked) DangerRed else TextSecondary
+                        ),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Icon(
+                            imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                            contentDescription = "إعجاب",
+                            tint = if (isLiked) DangerRed else TextSecondary,
+                            modifier = Modifier
+                                .size(18.dp)
+                                .scale(scale)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = numberFormat.format(likesCount),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 12.sp
+                        )
+                    }
                 }
             }
 
@@ -187,21 +235,47 @@ fun BlogScreen(
                             lineHeight = 26.sp
                         )
 
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
+                        // Stats Bar with live views, likes and read time
                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color(0xFF0C1322), RoundedCornerShape(10.dp))
+                                .padding(horizontal = 12.dp, vertical = 8.dp),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(Icons.Default.Person, contentDescription = null, tint = LuxuryGold, modifier = Modifier.size(14.dp))
+                                Icon(Icons.Default.Visibility, contentDescription = null, tint = LuxuryGold, modifier = Modifier.size(15.dp))
                                 Spacer(modifier = Modifier.width(4.dp))
-                                Text(article.author, color = TextSecondary, fontSize = 11.sp)
+                                Text(
+                                    text = "${numberFormat.format(viewsCount)} مشاهدة",
+                                    color = Color(0xFFE2E8F0),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
                             }
+
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(Icons.Default.AccessTime, contentDescription = null, tint = LuxuryGold, modifier = Modifier.size(14.dp))
+                                Icon(Icons.Default.Favorite, contentDescription = null, tint = DangerRed, modifier = Modifier.size(15.dp))
                                 Spacer(modifier = Modifier.width(4.dp))
-                                Text(article.readTime, color = TextSecondary, fontSize = 11.sp)
+                                Text(
+                                    text = "${numberFormat.format(likesCount)} إعجاب",
+                                    color = Color(0xFFE2E8F0),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Default.AccessTime, contentDescription = null, tint = LuxuryGold, modifier = Modifier.size(15.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(
+                                    text = article.readTime,
+                                    color = TextSecondary,
+                                    fontSize = 11.sp
+                                )
                             }
                         }
 
@@ -219,20 +293,48 @@ fun BlogScreen(
 
                         Spacer(modifier = Modifier.height(20.dp))
 
-                        Button(
-                            onClick = {
-                                onWhatsAppShare("مقال مميز من عقارات النخبة:\n*${article.title}*\n\nقراءة المزيد عبر: https://hanan.pro/${article.id}")
-                            },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = LuxuryGold,
-                                contentColor = Color.Black
-                            ),
-                            shape = RoundedCornerShape(12.dp),
-                            modifier = Modifier.fillMaxWidth()
+                        // Interaction Row: Like + Share WhatsApp
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(18.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("مشاركة المقال عبر واتساب", fontWeight = FontWeight.Bold)
+                            Button(
+                                onClick = { onArticleLiked(article.id) },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = if (isLiked) DangerRed else Color(0xFF334155),
+                                    contentColor = Color.White
+                                ),
+                                shape = RoundedCornerShape(12.dp),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Icon(
+                                    imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = if (isLiked) "أعجبك (${numberFormat.format(likesCount)})" else "إعجاب (${numberFormat.format(likesCount)})",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp
+                                )
+                            }
+
+                            Button(
+                                onClick = {
+                                    onWhatsAppShare("مقال مميز من عقارات النخبة:\n*${article.title}*\n\nقراءة المزيد عبر: https://hanan.pro/${article.id}")
+                                },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = LuxuryGold,
+                                    contentColor = Color.Black
+                                ),
+                                shape = RoundedCornerShape(12.dp),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("مشاركة واتساب", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                            }
                         }
                     }
                 }
@@ -247,7 +349,6 @@ fun BlogScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                // Header Card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp),
@@ -259,14 +360,14 @@ fun BlogScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "📰 مدونة عقارات النخبة",
-                            fontSize = 20.sp,
+                            text = "📰 مدونة وتقارير عقارات النخبة",
+                            fontSize = 19.sp,
                             fontWeight = FontWeight.Black,
                             color = LuxuryGold
                         )
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
-                            text = "أحدث التقارير والدراسات والأنظمة العقارية بالمملكة",
+                            text = "تحليلات السوق، أدلة التمويل وسكني وتملك الأجانب 2026",
                             fontSize = 12.sp,
                             color = TextSecondary,
                             textAlign = TextAlign.Center
@@ -276,10 +377,18 @@ fun BlogScreen(
             }
 
             items(sampleArticles) { article ->
+                val stat = articleStats[article.id]
+                val views = stat?.viewsCount ?: 1200
+                val likes = stat?.likesCount ?: 110
+                val isLiked = stat?.isLikedByUser == true
+
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { selectedArticleForRead = article },
+                        .clickable {
+                            onArticleViewed(article.id)
+                            selectedArticleForRead = article
+                        },
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = LuxuryNavyMedium),
                     border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF1E293B))
@@ -302,11 +411,36 @@ fun BlogScreen(
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
                                 )
                             }
-                            Text(
-                                text = article.readTime,
-                                color = TextSecondary,
-                                fontSize = 10.sp
-                            )
+
+                            // Live Views & Likes Counters Badge on the card
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(Icons.Default.Visibility, contentDescription = null, tint = LuxuryGold, modifier = Modifier.size(13.dp))
+                                    Spacer(modifier = Modifier.width(3.dp))
+                                    Text(numberFormat.format(views), color = TextSecondary, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
+                                }
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.clickable { onArticleLiked(article.id) }
+                                ) {
+                                    Icon(
+                                        imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                                        contentDescription = null,
+                                        tint = if (isLiked) DangerRed else TextSecondary,
+                                        modifier = Modifier.size(13.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(3.dp))
+                                    Text(
+                                        numberFormat.format(likes),
+                                        color = if (isLiked) DangerRed else TextSecondary,
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                            }
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))

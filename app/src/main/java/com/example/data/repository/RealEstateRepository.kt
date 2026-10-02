@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import com.example.data.local.ArticleStatsEntity
 import com.example.data.local.FavoriteEntity
 import com.example.data.local.PropertyDao
 import com.example.data.local.PropertyInquiryEntity
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 
 class RealEstateRepository(private val propertyDao: PropertyDao) {
 
@@ -218,7 +220,13 @@ class RealEstateRepository(private val propertyDao: PropertyDao) {
 
     fun getPropertiesFlow(): Flow<List<Property>> {
         return combine(propertyDao.getAllFavoriteIds()) { favoriteIdsArray ->
-            val favSet = favoriteIdsArray[0].toSet()
+            val favList = favoriteIdsArray[0]
+            val favSet = if (favList.isEmpty()) {
+                // If user hasn't added any yet, pre-populate default luxury favorites
+                setOf("prop-1", "prop-2", "prop-4")
+            } else {
+                favList.toSet()
+            }
             catalogProperties.map { prop ->
                 prop.copy(
                     isFavorite = favSet.contains(prop.id),
@@ -272,5 +280,66 @@ class RealEstateRepository(private val propertyDao: PropertyDao) {
         _notifications.value = _notifications.value.map {
             if (it.id == id) it.copy(isRead = true) else it
         }
+    }
+
+    private val defaultArticleStats = mapOf(
+        "article-1" to Pair(1248, 142),
+        "article-2" to Pair(980, 89),
+        "article-3" to Pair(1650, 214)
+    )
+
+    fun getArticleStatsFlow(): Flow<Map<String, ArticleStatsEntity>> {
+        return propertyDao.getAllArticleStats().map { list: List<ArticleStatsEntity> ->
+            val map = list.associateBy { it.articleId }.toMutableMap()
+            // Ensure default base numbers for articles
+            defaultArticleStats.forEach { (id, pair) ->
+                if (!map.containsKey(id)) {
+                    map[id] = ArticleStatsEntity(
+                        articleId = id,
+                        viewsCount = pair.first,
+                        likesCount = pair.second,
+                        isLikedByUser = false
+                    )
+                }
+            }
+            map
+        }
+    }
+
+    suspend fun incrementArticleView(articleId: String) {
+        val existing = propertyDao.getArticleStat(articleId)
+        val defaultBase = defaultArticleStats[articleId] ?: Pair(100, 10)
+        val currentViews = existing?.viewsCount ?: defaultBase.first
+        val currentLikes = existing?.likesCount ?: defaultBase.second
+        val isLiked = existing?.isLikedByUser ?: false
+
+        propertyDao.saveArticleStat(
+            com.example.data.local.ArticleStatsEntity(
+                articleId = articleId,
+                viewsCount = currentViews + 1,
+                likesCount = currentLikes,
+                isLikedByUser = isLiked
+            )
+        )
+    }
+
+    suspend fun toggleArticleLike(articleId: String) {
+        val existing = propertyDao.getArticleStat(articleId)
+        val defaultBase = defaultArticleStats[articleId] ?: Pair(100, 10)
+        val currentViews = existing?.viewsCount ?: defaultBase.first
+        val currentLikes = existing?.likesCount ?: defaultBase.second
+        val currentLiked = existing?.isLikedByUser ?: false
+
+        val newLiked = !currentLiked
+        val newLikesCount = if (newLiked) currentLikes + 1 else (currentLikes - 1).coerceAtLeast(0)
+
+        propertyDao.saveArticleStat(
+            com.example.data.local.ArticleStatsEntity(
+                articleId = articleId,
+                viewsCount = currentViews,
+                likesCount = newLikesCount,
+                isLikedByUser = newLiked
+            )
+        )
     }
 }

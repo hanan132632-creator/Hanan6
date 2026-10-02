@@ -34,4 +34,13 @@ interface PropertyDao {
 
     @Query("SELECT * FROM property_inquiries ORDER BY timestamp DESC")
     fun getAllInquiries(): Flow<List<PropertyInquiryEntity>>
+
+    @Query("SELECT * FROM article_stats")
+    fun getAllArticleStats(): Flow<List<ArticleStatsEntity>>
+
+    @Query("SELECT * FROM article_stats WHERE articleId = :articleId")
+    suspend fun getArticleStat(articleId: String): ArticleStatsEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveArticleStat(stat: ArticleStatsEntity)
 }

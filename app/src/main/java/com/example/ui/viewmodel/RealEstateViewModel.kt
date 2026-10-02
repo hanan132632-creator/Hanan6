@@ -154,6 +154,24 @@ class RealEstateViewModel(application: Application) : AndroidViewModel(applicati
         emptyList()
     )
 
+    val articleStats = repository.getArticleStatsFlow().stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        emptyMap()
+    )
+
+    fun recordArticleView(articleId: String) {
+        viewModelScope.launch {
+            repository.incrementArticleView(articleId)
+        }
+    }
+
+    fun toggleArticleLike(articleId: String) {
+        viewModelScope.launch {
+            repository.toggleArticleLike(articleId)
+        }
+    }
+
     fun selectTab(tab: AppTab) {
         _selectedTab.value = tab
     }

@@ -55,6 +55,7 @@ fun MainApp(
 
     val currentMortgageSimulation by viewModel.currentMortgageSimulation.collectAsStateWithLifecycle()
     val savedMortgages by viewModel.savedMortgages.collectAsStateWithLifecycle()
+    val articleStats by viewModel.articleStats.collectAsStateWithLifecycle()
     val monetagSmartLink by viewModel.monetagSmartLink.collectAsStateWithLifecycle()
     val smartLinkClicks by viewModel.smartLinkClicks.collectAsStateWithLifecycle()
 
@@ -313,6 +314,9 @@ fun MainApp(
 
                     AppTab.BLOG -> {
                         BlogScreen(
+                            articleStats = articleStats,
+                            onArticleViewed = { viewModel.recordArticleView(it) },
+                            onArticleLiked = { viewModel.toggleArticleLike(it) },
                             onWhatsAppShare = { msg -> viewModel.openWhatsApp(context, null, msg) }
                         )
                     }
