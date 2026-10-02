@@ -378,8 +378,8 @@ fun BlogScreen(
 
             items(sampleArticles) { article ->
                 val stat = articleStats[article.id]
-                val views = stat?.viewsCount ?: 1200
-                val likes = stat?.likesCount ?: 110
+                val views = stat?.viewsCount ?: 0
+                val likes = stat?.likesCount ?: 0
                 val isLiked = stat?.isLikedByUser == true
 
                 Card(

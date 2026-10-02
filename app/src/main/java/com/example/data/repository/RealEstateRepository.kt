@@ -283,15 +283,14 @@ class RealEstateRepository(private val propertyDao: PropertyDao) {
     }
 
     private val defaultArticleStats = mapOf(
-        "article-1" to Pair(1248, 142),
-        "article-2" to Pair(980, 89),
-        "article-3" to Pair(1650, 214)
+        "article-1" to Pair(0, 0),
+        "article-2" to Pair(0, 0),
+        "article-3" to Pair(0, 0)
     )
 
     fun getArticleStatsFlow(): Flow<Map<String, ArticleStatsEntity>> {
         return propertyDao.getAllArticleStats().map { list: List<ArticleStatsEntity> ->
             val map = list.associateBy { it.articleId }.toMutableMap()
-            // Ensure default base numbers for articles
             defaultArticleStats.forEach { (id, pair) ->
                 if (!map.containsKey(id)) {
                     map[id] = ArticleStatsEntity(
@@ -308,13 +307,13 @@ class RealEstateRepository(private val propertyDao: PropertyDao) {
 
     suspend fun incrementArticleView(articleId: String) {
         val existing = propertyDao.getArticleStat(articleId)
-        val defaultBase = defaultArticleStats[articleId] ?: Pair(100, 10)
+        val defaultBase = defaultArticleStats[articleId] ?: Pair(0, 0)
         val currentViews = existing?.viewsCount ?: defaultBase.first
         val currentLikes = existing?.likesCount ?: defaultBase.second
         val isLiked = existing?.isLikedByUser ?: false
 
         propertyDao.saveArticleStat(
-            com.example.data.local.ArticleStatsEntity(
+            ArticleStatsEntity(
                 articleId = articleId,
                 viewsCount = currentViews + 1,
                 likesCount = currentLikes,
@@ -325,7 +324,7 @@ class RealEstateRepository(private val propertyDao: PropertyDao) {
 
     suspend fun toggleArticleLike(articleId: String) {
         val existing = propertyDao.getArticleStat(articleId)
-        val defaultBase = defaultArticleStats[articleId] ?: Pair(100, 10)
+        val defaultBase = defaultArticleStats[articleId] ?: Pair(0, 0)
         val currentViews = existing?.viewsCount ?: defaultBase.first
         val currentLikes = existing?.likesCount ?: defaultBase.second
         val currentLiked = existing?.isLikedByUser ?: false
@@ -334,7 +333,7 @@ class RealEstateRepository(private val propertyDao: PropertyDao) {
         val newLikesCount = if (newLiked) currentLikes + 1 else (currentLikes - 1).coerceAtLeast(0)
 
         propertyDao.saveArticleStat(
-            com.example.data.local.ArticleStatsEntity(
+            ArticleStatsEntity(
                 articleId = articleId,
                 viewsCount = currentViews,
                 likesCount = newLikesCount,
