@@ -18,15 +18,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                // Native Jetpack Compose App loads instantly with offline support
-                var showNativeApp by remember { mutableStateOf(true) }
+                // Primary mode gives the user the full luxury website design with all pages:
+                // Home, Blog, Store, About, Contact, Privacy Policy, Terms, and Articles.
+                var showNativeViewOnly by remember { mutableStateOf(false) }
 
-                if (showNativeApp) {
-                    MainApp(onSwitchToWebView = { showNativeApp = false })
+                if (showNativeViewOnly) {
+                    MainApp(onSwitchToWebView = { showNativeViewOnly = false })
                 } else {
                     WebViewScreen(
                         initialUrl = "file:///android_asset/web/index.html",
-                        onSwitchToNativeApp = { showNativeApp = true }
+                        onSwitchToNativeApp = { showNativeViewOnly = true }
                     )
                 }
             }
