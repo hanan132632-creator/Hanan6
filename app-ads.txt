@@ -1,3 +1,0 @@
-# ملف app-ads.txt المعتمد من جوجل أدموب (Google AdMob / AdSense) لتطبيقات الأندرويد
-# استبدلي pub-XXXXXXXXXXXXXXXX بمعرف الناشر الخاص بكِ في AdMob / AdSense
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

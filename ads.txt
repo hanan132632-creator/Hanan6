@@ -1,3 +1,0 @@
-# ملف ads.txt المعتمد من جوجل أدسنس (Google AdSense)
-# استبدلي pub-XXXXXXXXXXXXXXXX بمعرف الناشر الخاص بكِ في جوجل أدسنس
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

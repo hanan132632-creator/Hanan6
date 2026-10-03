@@ -1,6 +1,0 @@
-{
-  "name": "عقارات النخبة",
-  "description": "تطبيق عقارات فاخر يتيح تصفح الفلل والشقق الفاخرة والأراضي الاستثمارية مع حاسبة تمويل عقاري وتواصل فوري",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

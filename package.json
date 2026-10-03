@@ -1,11 +1,13 @@
 {
   "name": "elite-realestate-web",
   "version": "1.0.0",
-  "description": "منصة عقارات النخبة - الموقع الرسمي الفاخر للعقارات الاستثمارية في المملكة العربية السعودية",
+  "description": "موقع عقارات النخبة الفاخر - البوابة العقارية للفلل والقصور والشقق والاستثمار",
+  "main": "server.js",
   "scripts": {
-    "start": "serve ."
+    "start": "node server.js",
+    "dev": "node server.js"
   },
-  "keywords": ["real-estate", "saudi", "luxury", "villas", "apartments"],
-  "author": "عقارات النخبة",
-  "license": "MIT"
+  "keywords": ["realestate", "luxury", "villas", "penthouses"],
+  "author": "Elite Real Estate",
+  "license": "ISC"
 }
